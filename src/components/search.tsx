@@ -1,7 +1,12 @@
-import React from 'react';
-import { Props } from "./navbar";
+import React, { useState } from 'react';
 
-const Search =({ handleChange }: Props) => {
+const Search =() => {
+  const [query, setQuery] = useState("")
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setQuery(e.target.value)
+    console.log(query);
+  }
+
   return (
     <>
       <div className="input-group w-50">

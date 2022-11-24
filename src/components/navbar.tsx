@@ -2,19 +2,15 @@ import { NavLink, Link } from "react-router-dom";
 import logo from "../assets/img/logo.png";
 import Search from "./search";
 
-export interface Props {
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void 
-}
-
-const Navbar = ({ handleChange }: Props) => {
+const Navbar = () => {
   return (
-    <nav className="navbar navbar-expand-lg bg-dark navbar-dark p-3">
-      <div className="container-fluid">
+    <nav className="navbar navbar-expand-lg bg-dark navbar-dark">
+      <div className="container">
         <Link to="/" className="navbar-brand">
           <img src={logo} className="img-fluid" alt="Site logo" />
         </Link>
 
-        <Search handleChange={handleChange} />
+        <Search />
 
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navlist">
           <span className="navbar-toggler-icon"></span>
