@@ -25,3 +25,8 @@ export const getDiscover = async () => {
   const res = await fetch(`${path}/discover/movie?api_key=${token}`)
   return res.json()
 }
+
+export const searchMovies = async (query: string) => {
+  const res = await fetch (`${path}/search/movie?api_key=${token}&query=${query}`)
+  return res.json()
+}
