@@ -1,13 +1,13 @@
 import React from 'react'
-import { movieSingle } from '../interfaces'
+import { MovieSingle } from '../interfaces'
 
 interface IProps {
-  listNameMovie: movieSingle
+  listNameMovie: MovieSingle
 }
 
 const MovieCard = ({ listNameMovie }: IProps) => {
   return (
-    <div className="card me-3 border-0" style={{minWidth: "250px"}}>
+    <div className="card me-3 border-0 pe-none user-select-none" style={{minWidth: "250px"}}>
       <img 
         src={`https://image.tmdb.org/t/p/w200${listNameMovie.poster_path}`} 
         className="card-img-top" 

@@ -15,3 +15,13 @@ export const getPopular = async () => {
   const res = await fetch(`${path}/movie/popular?api_key=${token}`)
   return res.json()
 }
+
+export const getGenres = async () => {
+  const res = await fetch(`${path}/genre/movie/list?api_key=${token}`)
+  return res.json()
+}
+
+export const getDiscover = async () => {
+  const res = await fetch(`${path}/discover/movie?api_key=${token}`)
+  return res.json()
+}
