@@ -43,15 +43,14 @@ const Home = () => {
     const genreInfo = genres.filter((genre: Genre) => genre.name === genreName)
     const genreId = genreInfo[0].id;
 
-    const discoverMovies = await moviesAPI.getDiscover().then(discover => discover.results)
-    const discoverMoviesByGenreName = discoverMovies.filter((movies: MovieSingle) => movies.genre_ids.includes(genreId))
+    const discoverMoviesByGenreName = await moviesAPI.getByGenreName(genreId).then(movieByGenre => movieByGenre.results)
 
     setState(discoverMoviesByGenreName)
   }
 
   return (
     <div className="bg-dark text-white p-3">
-      <MovieHorizontalList listName={trending} listNameTitle="Trending movies" />
+      <MovieHorizontalList listName={trending} listNameTitle="Todays trending movies" />
       <MovieHorizontalList listName={thrillers} listNameTitle="Discover Thriller movies" />
       <MovieHorizontalList listName={upcoming} listNameTitle="Upcoming movies" />
       <MovieHorizontalList listName={comedies} listNameTitle="Discover Comedy movies" />

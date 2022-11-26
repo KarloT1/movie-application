@@ -21,8 +21,8 @@ export const getGenres = async () => {
   return res.json()
 }
 
-export const getDiscover = async () => {
-  const res = await fetch(`${path}/discover/movie?api_key=${token}`)
+export const getByGenreName = async (genreId: string) => {
+  const res = await fetch(`${path}/discover/movie?api_key=${token}&with_genres=${genreId}`)
   return res.json()
 }
 
