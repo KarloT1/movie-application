@@ -30,3 +30,13 @@ export const searchMovies = async (query: string) => {
   const res = await fetch (`${path}/search/movie?api_key=${token}&query=${query}`)
   return res.json()
 }
+
+export const getMovieDetails = async (movieId: string) => {
+  const res = await fetch(`${path}/movie/${movieId}?api_key=${token}`)
+  return res.json()
+}
+
+export const getSimilarMovies = async (movieId: string) => {
+  const res = await fetch(`${path}/movie/${movieId}/similar?api_key=${token}`)
+  return res.json()
+}

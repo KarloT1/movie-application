@@ -4,7 +4,7 @@ import Search from "./search";
 
 const Navbar = () => {
   return (
-    <nav className="navbar navbar-expand-lg bg-dark navbar-dark">
+    <nav className="navbar navbar-expand-lg bg-dark navbar-dark py-3">
       <div className="container">
         <Link to="/" className="navbar-brand me-lg-5 me-0">
           <img src={logo} className="img-fluid" alt="Site logo" />

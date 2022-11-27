@@ -49,7 +49,7 @@ const Home = () => {
   }
 
   return (
-    <div className="bg-dark text-white p-3">
+    <div className="bg-dark text-white p-3 py-5">
       <MovieHorizontalList listName={trending} listNameTitle="Todays trending movies" />
       <MovieHorizontalList listName={thrillers} listNameTitle="Discover Thriller movies" />
       <MovieHorizontalList listName={upcoming} listNameTitle="Upcoming movies" />

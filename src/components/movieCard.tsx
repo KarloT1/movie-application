@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { MovieSingle } from '../interfaces'
 
 interface IProps {
@@ -7,17 +8,16 @@ interface IProps {
 
 const MovieCard = ({ listNameMovie }: IProps) => {
   return (
-    <div className="card me-3 border-0 pe-none user-select-none" style={{minWidth: "250px"}}>
-      <img 
-        src={`https://image.tmdb.org/t/p/w200${listNameMovie.poster_path}`} 
-        className="card-img-top" 
-        alt=""
-        style={{height: "372px"}}
-      />
-      <div className="card-body">
-        <p className="card-text">{listNameMovie.title}</p>
+    <Link to={`/movie-details/${listNameMovie.id}`} className="text-decoration-none text-dark">
+      <div className="card me-3 border-0 pe-none user-select-none bg-dark" style={{minWidth: "250px"}}>
+        <img 
+          src={`https://image.tmdb.org/t/p/w300${listNameMovie.poster_path}`} 
+          className="card-img-top" 
+          alt=""
+          style={{height: "375px"}}
+        />
       </div>
-    </div>
+    </Link>
   )
 }
 
