@@ -52,8 +52,8 @@ const Search =() => {
           <div className="position-absolute top-100 start-0 w-100" style={{zIndex: "1"}}>
             <ul className="list-group">
               {searchedMovies.splice(0, 5).map(movie => (
-                <Link to={`/movie-details/${movie.id}`} className="text-decoration-none">
-                  <li className="list-group-item bg-dark text-light d-flex justify-content-start align-items-center" key={movie.id}>
+                <Link to={`/movie-details/${movie.id}`} className="text-decoration-none" key={movie.id}>
+                  <li className="list-group-item bg-dark text-light d-flex justify-content-start align-items-center">
                     {movie.poster_path ? (
                       <img 
                         src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} 

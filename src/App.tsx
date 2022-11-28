@@ -21,7 +21,7 @@ const App = () => {
         <Route path="/search-results/:query" element={<SearchResults />} />
       </Routes>
       <Icon.ArrowUpCircle 
-        className="position-fixed bottom-0 end-0 text-light h1 mb-5 me-5" 
+        className="position-fixed bottom-0 end-0 text-light h1 mb-3 me-2" 
         onClick={scrollToTop} 
         style={{cursor: "pointer"}}
       />

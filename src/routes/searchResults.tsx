@@ -31,8 +31,12 @@ const SearchResults = () => {
       setTotalPages(searchedMovies.total_pages)
       setTotalResults(searchedMovies.total_results)
       
-      let updatedData = moviesByKeyword.concat(searchedMovies.results)
-      setMoviesByKeyword(updatedData)
+      if (params.query !== query) {
+        setMoviesByKeyword(searchedMovies.results)
+      } else {
+        let updatedData = moviesByKeyword.concat(searchedMovies.results)
+        setMoviesByKeyword(updatedData)
+      }
     })
   }
 
@@ -40,7 +44,7 @@ const SearchResults = () => {
     const userScrollHeight = window.innerHeight + window.scrollY;
     const windowBottomHeight = document.documentElement.offsetHeight;
 
-    if(userScrollHeight >= windowBottomHeight && currentPage < totalPages) {
+    if(userScrollHeight >= windowBottomHeight && currentPage <= totalPages) {
       setCurrentPage(prev => prev + 1)
     }
   }
