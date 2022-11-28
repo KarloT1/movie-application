@@ -17,15 +17,15 @@ const Navbar = () => {
         </button>
 
         <div className="collapse navbar-collapse" id="navlist">
-          <ul className="navbar-nav ms-auto text-end">
+          <ul className="navbar-nav ms-auto text-center align-items-center">
             <li className="nav-item">
               <NavLink to="/" className="nav-link">
                 Home
               </NavLink>
             </li>
-            <li className="nav-item">
+            <li className="nav-item btn btn-warning ms-lg-3 text-uppercase fw-bold mt-3 mt-lg-0">
               <NavLink to="/movie-discovery" className="nav-link">
-                Movie Discovery
+                Discover Movies
               </NavLink>
             </li>
           </ul>

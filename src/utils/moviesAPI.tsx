@@ -45,3 +45,8 @@ export const searchMoviesPagination = async (query: string, pageNumber: number) 
   const res = await fetch (`${path}/search/movie?api_key=${token}&query=${query}&page=${pageNumber}&language=en-US&include_adult=false`)
   return res.json()
 }
+
+export const getDiscover = async (pageNumber: number) => {
+  const res = await fetch(`${path}/discover/movie?api_key=${token}&page=${pageNumber}&language=en-US&include_adult=false`)
+  return res.json()
+}
