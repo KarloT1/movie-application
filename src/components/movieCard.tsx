@@ -4,12 +4,18 @@ import { MovieSingle } from '../interfaces'
 
 interface IProps {
   listNameMovie: MovieSingle
+  className?: string
 }
 
-const MovieCard = ({ listNameMovie }: IProps) => {
+const MovieCard = ({ listNameMovie, className }: IProps) => {
   return (
     <Link to={`/movie-details/${listNameMovie.id}`} className="text-decoration-none text-dark">
-      <div className="card me-3 border-0 pe-none user-select-none bg-dark" style={{minWidth: "250px"}}>
+      <div 
+        className={`card me-3 border-0 pe-none 
+                    user-select-none bg-dark
+                    ${className ? className : ""}`} 
+        style={{minWidth: "250px"}}
+      >
         <img 
           src={`https://image.tmdb.org/t/p/w300${listNameMovie.poster_path}`} 
           className="card-img-top" 

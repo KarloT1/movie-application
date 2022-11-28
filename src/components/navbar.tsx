@@ -28,11 +28,6 @@ const Navbar = () => {
                 Movie Discovery
               </NavLink>
             </li>
-            <li className="nav-item">
-              <NavLink to="/movie-details" className="nav-link">
-                Movie Details
-              </NavLink>
-            </li>
           </ul>
         </div>
       </div>
