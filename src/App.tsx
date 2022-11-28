@@ -5,8 +5,12 @@ import SearchResults from "./routes/searchResults";
 import Home from "./routes/home";
 import MovieDetails from "./routes/movieDetails";
 import MovieDiscovery from "./routes/movieDiscovery";
+import * as Icon from 'react-bootstrap-icons';
 
 const App = () => {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" })
+  }
   return (
     <BrowserRouter>
       <Navbar />
@@ -16,6 +20,11 @@ const App = () => {
         <Route path="/movie-details/:movieId" element={<MovieDetails />} />
         <Route path="/search-results/:query" element={<SearchResults />} />
       </Routes>
+      <Icon.ArrowUpCircle 
+        className="position-fixed bottom-0 end-0 text-light h1 mb-5 me-5" 
+        onClick={scrollToTop} 
+        style={{cursor: "pointer"}}
+      />
     </BrowserRouter>
   );
 }

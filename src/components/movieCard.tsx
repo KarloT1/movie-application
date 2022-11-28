@@ -16,12 +16,21 @@ const MovieCard = ({ listNameMovie, className }: IProps) => {
                     ${className ? className : ""}`} 
         style={{minWidth: "250px"}}
       >
-        <img 
-          src={`https://image.tmdb.org/t/p/w300${listNameMovie.poster_path}`} 
-          className="card-img-top" 
-          alt=""
-          style={{height: "375px"}}
-        />
+        {listNameMovie.poster_path ? (
+          <img 
+            src={`https://image.tmdb.org/t/p/w300${listNameMovie.poster_path}`} 
+            className="card-img-top" 
+            alt=""
+            style={{height: "375px"}}
+          />
+        ) : (
+          <img 
+            src="" 
+            className="card-img-top" 
+            alt={`${listNameMovie.title} poster.`}
+            style={{height: "375px"}}
+          />
+        )}
       </div>
     </Link>
   )

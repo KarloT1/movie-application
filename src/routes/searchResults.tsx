@@ -12,16 +12,37 @@ const SearchResults = () => {
   
   const [query, setQuery] = useState("")
   const [moviesByKeyword, setMoviesByKeyword] = useState<MovieSingle[]>([])
+  const [currentPage, setCurrentPage] = useState(1)
+  const [totalPages, setTotalPages] = useState(1)
+  const [totalResults, setTotalResults] = useState(1)
   
   const params = useParams<keyof Params>() as Params
 
   useEffect(() => {
     setQuery(params.query)
     getMoviesByKeyword()
-  }, [params.query])
+    window.addEventListener("scroll", handleScroll)
 
-  const getMoviesByKeyword = () => {
-    moviesAPI.searchMovies(params.query).then(moviesByKeyword => setMoviesByKeyword(moviesByKeyword.results))
+  }, [params.query, currentPage])
+
+  const getMoviesByKeyword = async () => {
+    await moviesAPI.searchMoviesPagination(params.query, currentPage)
+    .then(searchedMovies => {
+      setTotalPages(searchedMovies.total_pages)
+      setTotalResults(searchedMovies.total_results)
+      
+      let updatedData = moviesByKeyword.concat(searchedMovies.results)
+      setMoviesByKeyword(updatedData)
+    })
+  }
+
+  const handleScroll = async () => {
+    const userScrollHeight = window.innerHeight + window.scrollY;
+    const windowBottomHeight = document.documentElement.offsetHeight;
+
+    if(userScrollHeight >= windowBottomHeight && currentPage < totalPages) {
+      setCurrentPage(prev => prev + 1)
+    }
   }
 
   return (
@@ -29,7 +50,9 @@ const SearchResults = () => {
       <div className="container">
         {moviesByKeyword.length ? (
           <>
-            <h2 className="mb-5">{`Search results for: "${query}"`}</h2>
+            <h2 className="mb-3">{`Search results for: "${query}"`}</h2>
+            <p className="lead text-muted mb-3">{`Total number of results: ${totalResults}`}</p>
+            <p className="lead text-muted mb-5">{`Currently showing: ${moviesByKeyword.length}`}</p>
             <div className="d-flex flex-wrap justify-content-lg-between justify-content-center">
               {moviesByKeyword.map((movie, index) => (
                 <MovieCard listNameMovie={movie} key={index} className="mb-4" />

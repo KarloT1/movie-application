@@ -58,6 +58,7 @@ const MovieDetails = () => {
               <img 
                 src={`https://image.tmdb.org/t/p/w400${movieDetails.poster_path}`} 
                 className="img-fluid w-75" 
+                alt={`${movieDetails.title} poster.`}
               />
             </div>
 
