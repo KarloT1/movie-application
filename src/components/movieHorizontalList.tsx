@@ -1,6 +1,6 @@
 import React from 'react'
 import { MovieSingle } from '../interfaces'
-import MovieCard from './movieCard'
+import MovieCard from './movieCard/movieCard'
 
 interface IProps {
   listName: MovieSingle[]

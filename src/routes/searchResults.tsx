@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import MovieCard from '../components/movieCard'
+import MovieCard from '../components/movieCard/movieCard'
 import { MovieSingle } from '../interfaces'
 import * as moviesAPI from "../utils/moviesAPI"
 

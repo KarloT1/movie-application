@@ -11,16 +11,16 @@ const Search =() => {
   const navigate = useNavigate()
 
   useEffect(() => {
+    const searchBooks = () => {
+      query.length && (
+        moviesAPI.searchMovies(query).then(searchedMovies => {
+          setSearchedMovies(searchedMovies.results)
+        })
+      )
+    }
+
     searchBooks()
   }, [query])
-
-  const searchBooks = () => {
-    query.length && (
-      moviesAPI.searchMovies(query).then(searchedMovies => {
-        setSearchedMovies(searchedMovies.results)
-      })
-    )
-  }
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {

@@ -1,0 +1,16 @@
+.custom-card-box {
+  transition: 0.2s ease-in-out;
+  opacity: 0.5;
+}
+.custom-card-box:hover {
+  opacity: 1;
+}
+
+.custom-card-box img {
+  transition: 0.2s ease-in-out;
+  transform: scale(0.9);
+}
+
+.custom-card-box:hover img {
+  transform: scale(1);
+}

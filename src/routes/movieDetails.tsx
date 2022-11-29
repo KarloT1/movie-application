@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import * as moviesAPI from "../utils/moviesAPI"
 import { MovieSingle } from "../interfaces";
 import MovieHorizontalList from '../components/movieHorizontalList';
+import * as Icon from 'react-bootstrap-icons';
 
 interface Params {
   movieId: string
@@ -13,9 +14,14 @@ const MovieDetails = () => {
   const [movieDetails, setMovieDetails] = useState<MovieSingle>()
   const [similar, setSimilar] = useState<MovieSingle[]>([])
   const [loading, setLoading] = useState<boolean>(true)
+  const [storageItem, setStorageItem] = useState<number[]>([])
+  const [isHovered, setIsHovered] = useState(false)
+
   const params = useParams<keyof Params>() as Params;
+  const isFavorite = storageItem.includes(parseInt(params.movieId))
 
   useEffect(() => {
+    setStorageItem(JSON.parse(localStorage.getItem("favorites") || "[]"))
     getMovieDetails()
     getSimilarMovies()
   }, [params.movieId])
@@ -34,6 +40,18 @@ const MovieDetails = () => {
         setSimilar(similarMovies.results)
       })
       .then(() => setLoading(false))
+  }
+
+  const toggleFavorite = () => {
+    if (!isFavorite) {
+      const newStorageItem = [...storageItem, parseInt(params.movieId)];
+      setStorageItem(newStorageItem)
+      localStorage.setItem("favorites", JSON.stringify(newStorageItem))
+    } else {
+      const newStorageItem = storageItem.filter(favoriteId => favoriteId !== parseInt(params.movieId))
+      setStorageItem(newStorageItem)
+      localStorage.setItem("favorites", JSON.stringify(newStorageItem))
+    }
   }
 
   const releaseDate = movieDetails?.release_date
@@ -63,7 +81,25 @@ const MovieDetails = () => {
             </div>
 
             <div className="col-lg-6">
-              <h2 className="text-lg-start text-center">{movieDetails.title}</h2>
+              <div className="d-flex align-items-center justify-content-between">
+                <h2 className="text-lg-start text-center">{movieDetails.title}</h2>
+                <div 
+                  className=""
+                  onMouseOver={() => setIsHovered(true)} 
+                  onMouseOut={() => setIsHovered(false)} 
+                  onClick={toggleFavorite}
+                  style={{cursor: "pointer"}}
+                >
+                  {isHovered || isFavorite
+                  ? <Icon.BookmarkFill
+                      className="text-warning h3 m-2"
+                    />
+                  : <Icon.Bookmark
+                      className="text-warning h3 m-2"
+                    />
+                  }
+                </div>
+              </div>
               <hr className="my-5"/>
               <p className="lead">
                 <span className="fw-bold text-uppercase">Plot: </span>
