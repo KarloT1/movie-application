@@ -25,7 +25,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint . --ext .tsx"
+    "lint": "eslint . --ext .tsx",
+    "docker": "docker run -it --rm -p 80:80 movie-application:latest "
   },
   "eslintConfig": {
     "extends": [
