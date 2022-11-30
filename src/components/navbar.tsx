@@ -23,6 +23,11 @@ const Navbar = () => {
                 Home
               </NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink to="/favorites" className="nav-link">
+                Favorites
+              </NavLink>
+            </li>
             <li className="nav-item btn btn-warning ms-lg-3 text-uppercase fw-bold mt-3 mt-lg-0">
               <NavLink to="/movie-discovery" className="nav-link">
                 Discover Movies

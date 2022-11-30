@@ -14,14 +14,17 @@ const MovieDetails = () => {
   const [movieDetails, setMovieDetails] = useState<MovieSingle>()
   const [similar, setSimilar] = useState<MovieSingle[]>([])
   const [loading, setLoading] = useState<boolean>(true)
-  const [storageItem, setStorageItem] = useState<number[]>([])
+  const [storageItems, setStorageItems] = useState<MovieSingle[]>([])
+  const [storageIds, setStorageIds] = useState<number[]>([])
   const [isHovered, setIsHovered] = useState(false)
 
   const params = useParams<keyof Params>() as Params;
-  const isFavorite = storageItem.includes(parseInt(params.movieId))
+  const areFavorites = storageIds.includes(parseInt(params.movieId))
 
   useEffect(() => {
-    setStorageItem(JSON.parse(localStorage.getItem("favorites") || "[]"))
+    setStorageItems(JSON.parse(localStorage.getItem("favorites") || "[]"))
+    setStorageIds(JSON.parse(localStorage.getItem("favoritesIds") || "[]"))
+
     getMovieDetails()
     getSimilarMovies()
   }, [params.movieId])
@@ -43,14 +46,36 @@ const MovieDetails = () => {
   }
 
   const toggleFavorite = () => {
-    if (!isFavorite) {
-      const newStorageItem = [...storageItem, parseInt(params.movieId)];
-      setStorageItem(newStorageItem)
-      localStorage.setItem("favorites", JSON.stringify(newStorageItem))
+    // Save existing favorites objects and ids to a variable
+    let existingFavorites: MovieSingle[] = JSON.parse(localStorage.getItem("favorites") || "[]")
+    let existingFavIds: number[] = JSON.parse(localStorage.getItem("favoritesIds") || "[]")
+    // Check if the clicked movie is a favorite
+    let isFavorite = existingFavorites.filter(entry => {
+      return entry.id === parseInt(params.movieId)
+    })
+    
+    if (!isFavorite.length) {
+
+      // Set favorites object to local storage & to state
+      movieDetails && existingFavorites.push(movieDetails)
+      localStorage.setItem("favorites", JSON.stringify(existingFavorites))
+      setStorageItems(existingFavorites)
+
+      // Set favorites id to local storage & to state
+      existingFavIds.push(parseInt(params.movieId))
+      localStorage.setItem("favoritesIds", JSON.stringify(existingFavIds))
+      setStorageIds(existingFavIds)
     } else {
-      const newStorageItem = storageItem.filter(favoriteId => favoriteId !== parseInt(params.movieId))
-      setStorageItem(newStorageItem)
-      localStorage.setItem("favorites", JSON.stringify(newStorageItem))
+
+      // Set favorites object to local storage & to state
+      existingFavorites = existingFavorites.filter(favoriteMovie => favoriteMovie.id !== parseInt(params.movieId))
+      localStorage.setItem("favorites", JSON.stringify(existingFavorites))
+      setStorageItems(existingFavorites)
+
+      // Set favorites id to local storage & to state
+      existingFavIds = existingFavIds.filter(favoriteId => favoriteId !== parseInt(params.movieId))
+      localStorage.setItem("favoritesIds", JSON.stringify(existingFavIds))
+      setStorageIds(existingFavIds)
     }
   }
 
@@ -90,7 +115,7 @@ const MovieDetails = () => {
                   onClick={toggleFavorite}
                   style={{cursor: "pointer"}}
                 >
-                  {isHovered || isFavorite
+                  {isHovered || areFavorites
                   ? <Icon.BookmarkFill
                       className="text-warning h3 m-2"
                     />
