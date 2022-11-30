@@ -23,17 +23,29 @@ const MovieDiscovery = () => {
   const discoverFilter = async () => {
     if (activeGenre.length) {
       const activeGenreString = activeGenre.join(",");
-      moviesAPI.filterDiscover(currentPage, activeGenreString).then(discover => {
+      await moviesAPI.filterDiscover(currentPage, activeGenreString).then(discover => {
         setTotalPages(discover.total_pages)
         setTotalResults(discover.total_results)
-        setDiscoverMovies(discover.results)
+        if (currentPage > 1) {
+          const lastAddedGenre = activeGenre.at(-1)
+          
+          let updatedData = discoverMovies.concat(discover.results)
+          setDiscoverMovies(updatedData.filter(data => data.genre_ids.includes(lastAddedGenre ? lastAddedGenre : 0)))
+        } else {
+          setDiscoverMovies(discover.results)
+        }
       })
       
     } else {
-      moviesAPI.filterDiscover(currentPage, "").then(discover => {
+      await moviesAPI.filterDiscover(currentPage, "").then(discover => {
         setTotalPages(discover.total_pages)
         setTotalResults(discover.total_results)
-        setDiscoverMovies(discover.results)
+        if (currentPage > 1) {
+          let updatedData = discoverMovies.concat(discover.results)
+          setDiscoverMovies(updatedData)
+        } else {
+          setDiscoverMovies(discover.results)
+        }
       })
     }
   }
@@ -48,7 +60,7 @@ const MovieDiscovery = () => {
     }
   }
 
-  const disabled = discoverMovies.length < 20 ? true : false
+  const disabled = totalResults <= discoverMovies.length ? true : false
   return (
     <div className="bg-dark text-white p-3 py-5">
       <div className="container">
