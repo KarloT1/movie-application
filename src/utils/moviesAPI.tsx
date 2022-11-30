@@ -50,3 +50,8 @@ export const getDiscover = async (pageNumber: number) => {
   const res = await fetch(`${path}/discover/movie?api_key=${token}&page=${pageNumber}&language=en-US&include_adult=false`)
   return res.json()
 }
+
+export const filterDiscover = async (pageNumber: number, genres: string) => {
+  const res = await fetch(`${path}/discover/movie?api_key=${token}&page=${pageNumber}&with_genres=${genres}&language=en-US&include_adult=false`)
+  return res.json()
+}
