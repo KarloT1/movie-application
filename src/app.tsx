@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-// Components
 import Navbar from "./components/navbar";
 import SearchResults from "./routes/searchResults";
 import Home from "./routes/home";
@@ -12,6 +11,7 @@ const App = () => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" })
   }
+
   return (
     <BrowserRouter>
       <Navbar />

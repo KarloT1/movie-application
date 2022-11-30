@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { MovieSingle } from '../../interfaces'
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { MovieSingle } from '../../interfaces';
 import * as Icon from 'react-bootstrap-icons';
 
 interface IProps {
@@ -14,6 +14,7 @@ const MovieCard = ({ listNameMovie, className, removeFav }: IProps) => {
   const [, setStorageItems] = useState<MovieSingle[]>([])
   const [storageIds, setStorageIds] = useState<number[]>([])
 
+  // Check if current card is a favorite
   const areFavorites = storageIds.includes(listNameMovie.id)
   
   useEffect(() => {

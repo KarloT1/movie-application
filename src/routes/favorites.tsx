@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 import MovieCard from '../components/movieCard/movieCard';
 import { MovieSingle } from '../interfaces';
 
@@ -6,10 +6,12 @@ const Favorites = () => {
   const [favorites, setFavorites] = useState<MovieSingle[]>([])
 
   useEffect(() => {
+    // Get previously added favorites
     let existingFavorites: MovieSingle[] = JSON.parse(localStorage.getItem("favorites") || "[]")
     setFavorites(existingFavorites)
   }, [])
 
+  // Immediately update UI
   const removeFav = (movieId: number) => {
     setFavorites(favorites.filter(favorite => favorite.id !== movieId))
   }
