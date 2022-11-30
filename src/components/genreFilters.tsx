@@ -6,8 +6,9 @@ interface IProps {
   genre: Genre
   activeGenre: number[]
   setActiveGenre: React.Dispatch<React.SetStateAction<number[]>>
+  setGenreDeleted: React.Dispatch<React.SetStateAction<boolean>>
 }
-const GenreFilters = ({ genre, activeGenre, setActiveGenre }: IProps) => {
+const GenreFilters = ({ genre, activeGenre, setActiveGenre, setGenreDeleted }: IProps) => {
 
   const handleChange = (e:  React.ChangeEvent<HTMLInputElement>) => {
     getMoviesByGenreName(e.target.value)
@@ -19,6 +20,7 @@ const GenreFilters = ({ genre, activeGenre, setActiveGenre }: IProps) => {
     const genreId = genreInfo[0].id;
     if (activeGenre.includes(genreId)) {
       setActiveGenre(activeGenre.filter(genre => genre !== genreId))
+      setGenreDeleted(true)
     } else {
       let newGenre = [...activeGenre, genreId]
       setActiveGenre(newGenre)
