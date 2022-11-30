@@ -27,6 +27,7 @@ const MovieDetails = () => {
 
     getMovieDetails()
     getSimilarMovies()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params.movieId])
 
   const getMovieDetails = async () => {

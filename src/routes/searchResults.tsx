@@ -21,6 +21,8 @@ const SearchResults = () => {
   useEffect(() => {
     setQuery(params.query)
     getMoviesByKeyword()
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params.query, currentPage])
 
   const getMoviesByKeyword = async () => {

@@ -16,6 +16,8 @@ const MovieDiscovery = () => {
   useEffect(() => {
     discoverFilter()
     getGenres()
+    
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage, activeGenre])
 
   const discoverFilter = async () => {
