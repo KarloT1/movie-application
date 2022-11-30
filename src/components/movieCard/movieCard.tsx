@@ -11,7 +11,7 @@ interface IProps {
 
 const MovieCard = ({ listNameMovie, className, removeFav }: IProps) => {
   const [isHovered, setIsHovered] = useState(false)
-  const [storageItems, setStorageItems] = useState<MovieSingle[]>([])
+  const [, setStorageItems] = useState<MovieSingle[]>([])
   const [storageIds, setStorageIds] = useState<number[]>([])
 
   const areFavorites = storageIds.includes(listNameMovie.id)

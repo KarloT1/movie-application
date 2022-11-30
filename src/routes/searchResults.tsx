@@ -9,7 +9,7 @@ interface Params {
 }
 
 const SearchResults = () => {
-  
+
   const [query, setQuery] = useState("")
   const [moviesByKeyword, setMoviesByKeyword] = useState<MovieSingle[]>([])
   const [currentPage, setCurrentPage] = useState(1)
@@ -21,23 +21,28 @@ const SearchResults = () => {
   useEffect(() => {
     setQuery(params.query)
     getMoviesByKeyword()
-    window.addEventListener("scroll", handleScroll)
-
   }, [params.query, currentPage])
 
   const getMoviesByKeyword = async () => {
-    await moviesAPI.searchMoviesPagination(params.query, currentPage)
-    .then(searchedMovies => {
-      setTotalPages(searchedMovies.total_pages)
-      setTotalResults(searchedMovies.total_results)
-      
-      if (params.query !== query) {
+    if (params.query !== query) {
+      setMoviesByKeyword([])
+      setCurrentPage(1)
+      await moviesAPI.searchMoviesPagination(params.query, currentPage)
+      .then(searchedMovies => {
+        setTotalPages(searchedMovies.total_pages)
+        setTotalResults(searchedMovies.total_results)
         setMoviesByKeyword(searchedMovies.results)
-      } else {
+      })
+    } else {
+      await moviesAPI.searchMoviesPagination(params.query, currentPage)
+      .then(searchedMovies => {
+        setTotalPages(searchedMovies.total_pages)
+        setTotalResults(searchedMovies.total_results)
+
         let updatedData = moviesByKeyword.concat(searchedMovies.results)
         setMoviesByKeyword(updatedData)
-      }
-    })
+      })
+    }
   }
 
   const handleScroll = async () => {
@@ -49,6 +54,7 @@ const SearchResults = () => {
     }
   }
 
+  const disabled = totalPages === 1 ? true : false
   return (
     <div className="bg-dark text-white p-3 py-5">
       <div className="container">
@@ -61,6 +67,16 @@ const SearchResults = () => {
               {moviesByKeyword.map((movie, index) => (
                 <MovieCard listNameMovie={movie} key={index} className="mb-4" />
               ))}
+            </div>
+            <div className="d-flex justify-content-center align-items-center mt-4">
+              <button 
+                type="button" 
+                className="btn btn-outline-warning btn-lg"
+                onClick={handleScroll}
+                disabled={disabled}
+              >
+                Load more
+              </button>
             </div>
           </>
         ): (

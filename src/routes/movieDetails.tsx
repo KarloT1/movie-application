@@ -14,7 +14,7 @@ const MovieDetails = () => {
   const [movieDetails, setMovieDetails] = useState<MovieSingle>()
   const [similar, setSimilar] = useState<MovieSingle[]>([])
   const [loading, setLoading] = useState<boolean>(true)
-  const [storageItems, setStorageItems] = useState<MovieSingle[]>([])
+  const [, setStorageItems] = useState<MovieSingle[]>([])
   const [storageIds, setStorageIds] = useState<number[]>([])
   const [isHovered, setIsHovered] = useState(false)
 
